@@ -24,3 +24,35 @@ foreign key cus_id reference customer(cus_id) set null on delete
 
 -- Create Table bank_employee--
 create Table bank_employee (
+emp_id int primary key,
+emp_name varchar(20),
+emp_address varchar(20)
+)
+
+--create table works_with-
+create table works_with (
+emp_id int,
+manager_id int,
+primary key (emp_id,manager_id)
+foreign key emp_id reference bank_employee(emp_id) set null on delete,
+foreign key manager_id reference bank_branch(manager_id) set null on delete
+
+)
+
+--create table loan--
+create table loan (
+loan_id intp primary key,
+loan_amount int,
+cus_id int,
+foreign key branch_id reference bank_branch(branch_id) set null on delete,
+foreign key cus_id reference customer(cus_id) set null on delete
+)
+
+--create table deposit--
+create table deposit (
+deposit_id intp primary key,
+deposit_amount int,
+cus_id int,
+foreign key branch_id reference bank_branch(branch_id) set null on delete,
+foreign key cus_id reference customer(cus_id) set null on delete
+)
