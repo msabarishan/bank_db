@@ -18,8 +18,8 @@ create table cus_branch (
 branch_id int,
 cus_id int,
 primary key(branch_id, cus_id)
-foreign key branch_id reference bank_branch(branch_id) set null on delete,
-foreign key cus_id reference customer(cus_id) set null on delete
+foreign key branch_id reference bank_branch(branch_id) on delete set null,
+foreign key cus_id reference customer(cus_id) on delete set null
 )
 
 -- Create Table bank_employee--
@@ -34,8 +34,8 @@ create table works_with (
 emp_id int,
 manager_id int,
 primary key (emp_id,manager_id)
-foreign key emp_id reference bank_employee(emp_id) set null on delete,
-foreign key manager_id reference bank_branch(manager_id) set null on delete
+foreign key emp_id reference bank_employee(emp_id) on delete set null,
+foreign key manager_id reference bank_branch(manager_id) on delete set null
 
 )
 
@@ -44,8 +44,8 @@ create table loan (
 loan_id intp primary key,
 loan_amount int,
 cus_id int,
-foreign key branch_id reference bank_branch(branch_id) set null on delete,
-foreign key cus_id reference customer(cus_id) set null on delete
+foreign key branch_id reference bank_branch(branch_id) on delete set null,
+foreign key cus_id reference customer(cus_id) on delete set null
 )
 
 --create table deposit--
