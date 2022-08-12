@@ -1,0 +1,24 @@
+--Fetch and display data from table--
+select * from table deposit 
+select loan_id, loan_amount  from loan;
+
+-- Join---
+
+select loan.cus_id,loan.branch_id,loan.loan_amount,deposit.deposit_amount
+from loan
+join
+deposit
+on loan.cus_id=deposit.cus_id;
+--Other join - left join, right join to keep the data from only table 1 and table 2 respectively--
+
+--Aggregate Function---
+select cus_id,sum(loan_amount) as loan_amount from  loan group by cus_id;
+select cus_id,count(loan_amount) as loan_count from  loan group by cus_id;
+select cus_id,avg(loan_amount) as loan_average from  loan group by cus_id;
+select cus_id,max(loan_amount) as loan_max_value from  loan group by cus_id;
+select cus_id,min(loan_amount) as loan_max_value from  loan group by cus_id;
+
+--Having vs where--
+1. Having is always used with Aggregate function
+-Having Problem-
+select cus_id ,count(loan_amount) from (select cus_id, loan_amount from loan group by cus_id,loan_id having loan_amount >35000) as derived_table group by cus_id;
