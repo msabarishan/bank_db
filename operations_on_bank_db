@@ -19,6 +19,20 @@ select cus_id,max(loan_amount) as loan_max_value from  loan group by cus_id;
 select cus_id,min(loan_amount) as loan_max_value from  loan group by cus_id;
 
 --Having vs where--
-1. Having is always used with Aggregate function
+1. Having is always used with Aggregate function and grouping
 -Having Problem-
 select cus_id ,count(loan_amount) from (select cus_id, loan_amount from loan group by cus_id,loan_id having loan_amount >35000) as derived_table group by cus_id;
+
+--view--
+drop view if exists view1;
+create view view1 as (select cus_id,sum(loan_amount) as TLA from loan group by cus_id);
+create view view2 as (select cus_id,sum(deposit_amount) as TDA from deposit group by cus_id);
+create view view3 as (select view1.cus_id,view1.tla,view2.tda from view1 join view2 on view1.cus_id=view2.cus_id);
+select cus_id,tla,tda,(tda-tla) as credit from view3 order by view3.cus_id asc;
+
+--Rank functions--
+ROW_NUMBER() - select cus_id,loan_amount,row_number() over(order by loan_amount desc) Ranks from loan;
+RANK()- select cus_id,loan_amount,rank() over(partition by cus_id order by loan_amount desc) Ranks from loan; -if two records have same value the two records are given with rank 1 and 3 rd record with rank 3
+DENSE_RANK()-select cus_id,loan_amount,dense_rank() over(partition by cus_id order by loan_amount desc) Ranks from loan;-if two records have same value the two records are given with rank 1 and 3 rd record with rank 2
+NTILE()-
+
