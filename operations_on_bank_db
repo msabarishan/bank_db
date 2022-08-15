@@ -34,5 +34,10 @@ select cus_id,tla,tda,(tda-tla) as credit from view3 order by view3.cus_id asc;
 ROW_NUMBER() - select cus_id,loan_amount,row_number() over(order by loan_amount desc) Ranks from loan;
 RANK()- select cus_id,loan_amount,rank() over(partition by cus_id order by loan_amount desc) Ranks from loan; -if two records have same value the two records are given with rank 1 and 3 rd record with rank 3
 DENSE_RANK()-select cus_id,loan_amount,dense_rank() over(partition by cus_id order by loan_amount desc) Ranks from loan;-if two records have same value the two records are given with rank 1 and 3 rd record with rank 2
-NTILE()-
+NTILE(3)-select cus_id,loan_amount,dense_rank() over(partition by cus_id order by loan_amount desc) Ranks from loan;-if two records have same value the two records are given with rank 1 and 3 rd record with rank 2
+
+
+--lag()-before value--lead()-after value-
+select loan_id,loan_amount, lag(loan_amount) over (order by loan_id) as previous from loan;
+
 
