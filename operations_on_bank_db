@@ -40,4 +40,17 @@ NTILE(3)-select cus_id,loan_amount,dense_rank() over(partition by cus_id order b
 --lag()-before value--lead()-after value-
 select loan_id,loan_amount, lag(loan_amount) over (order by loan_id) as previous from loan;
 
+--Procedure--
+CREATE PROCEDURE new_pro(name1 varchar(30), age1 int)
+language sql
+as
+$$
+  insert into table1 values (name1,age1)
+$$
+
+call new_pro('Gion',22)
+
+select * from table1;
+
+drop procedure new_pro(name1 varchar(30), age1 int);
 
