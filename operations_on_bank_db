@@ -85,3 +85,18 @@ select concat(emp_name,' ',emp_address) as full_name from bank_employee order by
 https://www.edureka.co/blog/interview-questions/sql-query-interview-questions
 
 
+--Function--
+CREATE OR REPLACE FUNCTION random_between(low INT ,high INT) 
+   RETURNS INT AS
+$$
+BEGIN
+   RETURN floor(random()* (high-low + 1) + low);
+END;
+$$ language 'plpgsql' STRICT;
+
+--insert random number--
+update table1
+set bonus =(select random_between(100,1000))
+where person_name like 'c%'; 
+
+
